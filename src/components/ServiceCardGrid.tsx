@@ -32,7 +32,7 @@ const itemVariants: Variants = {
 
 export function ServiceCardGrid({
   servicesData,
-  title = 'Complete Dental Services',
+  title = 'Our Complete Dental Services',
   subtitle = 'From general dentistry to advanced cosmetic procedures',
 }: {
   servicesData?: (Service | number | null)[]
@@ -40,7 +40,7 @@ export function ServiceCardGrid({
   subtitle?: string
 }) {
   return (
-    <section className="py-20 border-t border-border">
+    <section className="py-24 ">
       <div className="container mx-auto">
         <motion.div
           className="text-center mb-12"

@@ -15,9 +15,9 @@ export const FeaturesBlockComponent: React.FC<FeaturesBlockProps> = ({
   return (
     <section className="py-16 md:py-20 bg-gradient-to-br from-primary/5 via-primary-10 to-secondary/20 border-t border-b">
       <div className="container mx-auto ">
-        <div className="grid items-center gap-8 md:grid-cols-2 lg:grid-cols-5 lg:gap-24">
+        <div className="grid items-center gap-8 md:grid-cols-2 lg:grid-cols-6 lg:gap-24">
           {/* Left Column */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <div className="md:pr-6 lg:pr-0">
               {title && <h2 className="text-3xl font-bold tracking-tight lg:text-4xl">{title}</h2>}
               {description && (

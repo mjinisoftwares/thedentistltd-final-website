@@ -7,14 +7,92 @@ const SITE_URL =
 module.exports = {
   siteUrl: SITE_URL,
   generateRobotsTxt: true,
-  exclude: ['/posts-sitemap.xml', '/pages-sitemap.xml', '/*', '/posts/*'],
+  exclude: ['/posts-sitemap.xml', '/pages-sitemap.xml', '/services-sitemap.xml', '/*', '/posts/*', '/services/*'],
   robotsTxtOptions: {
     policies: [
       {
         userAgent: '*',
-        disallow: '/admin/*',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'Googlebot',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'Bingbot',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      // Allow AI Scrapers (allow crawling on content)
+      {
+        userAgent: 'GPTBot',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'ClaudeBot',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'Google-Extended',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'Applebot-Extended',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'CCBot',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'Omgili',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'FacebookBot',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'Bytespider',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'Diffbot',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'cohere-ai',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      // Allow real-time search queries by AI assistants (to provide citations/answers)
+      {
+        userAgent: 'ChatGPT-User',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
+      },
+      {
+        userAgent: 'PerplexityBot',
+        allow: '/',
+        disallow: ['/admin/*', '/api/*', '/search'],
       },
     ],
-    additionalSitemaps: [`${SITE_URL}/pages-sitemap.xml`, `${SITE_URL}/posts-sitemap.xml`],
+    additionalSitemaps: [
+      `${SITE_URL}/pages-sitemap.xml`,
+      `${SITE_URL}/posts-sitemap.xml`,
+      `${SITE_URL}/services-sitemap.xml`
+    ],
   },
 }
+

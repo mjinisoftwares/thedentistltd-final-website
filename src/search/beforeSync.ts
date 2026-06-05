@@ -7,8 +7,10 @@ export const beforeSyncWithSearch: BeforeSync = async ({ req, originalDoc, searc
 
   const { slug, id, categories, title, meta } = originalDoc
 
+  const { id: searchDocId, ...searchDocRest } = searchDoc
+
   const modifiedDoc: DocToSync = {
-    ...searchDoc,
+    ...searchDocRest,
     slug,
     meta: {
       ...meta,

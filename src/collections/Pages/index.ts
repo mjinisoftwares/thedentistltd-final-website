@@ -13,13 +13,7 @@ import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField,
-} from '@payloadcms/plugin-seo/fields'
+import { seoFields } from '@/fields/seo'
 import { PartnersBlock } from '@/blocks/PartnersBlock/config'
 import { StatsBlock } from '@/blocks/Stats/config'
 import { FeaturesBlock } from '@/blocks/FeaturesBlock/config'
@@ -32,6 +26,8 @@ import { UsefulLinksBlock } from '@/blocks/UsefulLinksBlock/config'
 import { AboutBlock } from '@/blocks/AboutBlock/config'
 import { Feature2 } from '@/blocks/Feature2Block/config'
 import { MapBlock } from '@/blocks/MapBlock/config'
+import { NaivashaTeamBlock } from '@/blocks/NaivashaTeamBlock/config'
+import CTABlock from '@/blocks/CTABlock/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -98,10 +94,12 @@ export const Pages: CollectionConfig<'pages'> = {
                 GalleryBlock,
                 ServiceBlock,
                 TeamBlock,
+                NaivashaTeamBlock,
                 UsefulLinksBlock,
                 AboutBlock,
                 Feature2,
                 MapBlock,
+                CTABlock,
               ],
               required: true,
               admin: {
@@ -114,29 +112,7 @@ export const Pages: CollectionConfig<'pages'> = {
         {
           name: 'meta',
           label: 'SEO',
-          fields: [
-            OverviewField({
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-              imagePath: 'meta.image',
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: 'media',
-            }),
-
-            MetaDescriptionField({}),
-            PreviewField({
-              // if the `generateUrl` function is configured
-              hasGenerateFn: true,
-
-              // field paths to match the target field for data
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-            }),
-          ],
+          fields: seoFields,
         },
       ],
     },

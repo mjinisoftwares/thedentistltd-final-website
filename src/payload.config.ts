@@ -18,6 +18,7 @@ import { getServerSideURL } from './utilities/getURL'
 import { Services } from './collections/Services'
 import { Team } from './collections/Team'
 import { UsefulLinks } from './collections/UsefulLinks'
+import { NaivashaTeam } from './collections/NaivashaTeam'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -71,7 +72,18 @@ export default buildConfig({
     defaultFromAddress: 'info@thedentistltd.co.ke',
     defaultFromName: 'The Dentist LTD',
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Partners, Team, UsefulLinks, Services],
+  collections: [
+    Pages,
+    Posts,
+    Media,
+    Categories,
+    Users,
+    Partners,
+    Team,
+    UsefulLinks,
+    Services,
+    NaivashaTeam,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins,

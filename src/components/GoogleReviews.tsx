@@ -36,7 +36,7 @@ export default function ReviewsWidget() {
     <>
       <section
         ref={sectionRef}
-        className="container mx-auto overflow-hidden bg-gradient-to-b from-transparent via-primary/5 to-transparent border-t border-border/50 py-24"
+        className="container max-w-7xl mx-auto overflow-hidden bg-gradient-to-b from-transparent via-primary/5 to-transparent border-t border-border/50 py-24"
       >
         <div className="">
           <div className="relative z-10 mx-auto max-w-3xl text-center mb-8">
@@ -56,7 +56,7 @@ export default function ReviewsWidget() {
             </motion.div>
           </div>
 
-          <div className="relative min-h-[450px] w-full max-w-6xl mx-auto">
+          <div className="relative min-h-[450px] w-full mx-auto">
             {/* ✅ Beautiful Loading State */}
             <AnimatePresence>
               {!isScriptLoaded && (

@@ -10,8 +10,8 @@ test.describe('Frontend', () => {
 
   test('can load homepage', async ({ page }) => {
     await page.goto('https://www.thedentistltd.co.ke')
-    await expect(page).toHaveTitle(/Payload Website Template/)
+    await expect(page).toHaveTitle(/The Dentist LTD/)
     const heading = page.locator('h1').first()
-    await expect(heading).toHaveText('Payload Website Template')
+    await expect(heading).toHaveText('The Dentist LTD')
   })
 })

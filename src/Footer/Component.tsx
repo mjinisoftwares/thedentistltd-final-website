@@ -25,7 +25,7 @@ export async function Footer() {
     >
       <div className="container">
         <footer>
-          <div className="grid grid-cols-2 gap-8 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
             {/* Logo and Tagline Column */}
             <div className="col-span-1 mb-8 lg:mb-0">
               <div className="flex items-center gap-2 lg:justify-start">

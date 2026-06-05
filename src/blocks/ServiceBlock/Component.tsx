@@ -37,7 +37,7 @@ export const ServiceBlock: React.FC<ServiceBlockProps> = async (props) => {
   }
 
   return (
-    <div id={`block-${id}`}>
+    <div id={`block-${id}`} className="py-16 md:py-24 ">
       <ServiceCardGrid servicesData={servicesData} title={title} subtitle={subtitle} />
     </div>
   )

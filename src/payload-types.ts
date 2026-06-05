@@ -76,6 +76,7 @@ export interface Config {
     team: Team;
     'useful-links': UsefulLink;
     services: Service;
+    'naivasha-team': NaivashaTeam;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -102,6 +103,7 @@ export interface Config {
     team: TeamSelect<false> | TeamSelect<true>;
     'useful-links': UsefulLinksSelect<false> | UsefulLinksSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
+    'naivasha-team': NaivashaTeamSelect<false> | NaivashaTeamSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -241,10 +243,12 @@ export interface Page {
     | GalleryBlock
     | ServiceBlock
     | TeamBlock
+    | NaivashaTeamBlock
     | UsefulLinksBlock
     | AboutBlock
     | Feature2Block
     | MapBlock
+    | CTABlock
   )[];
   meta?: {
     title?: string | null;
@@ -253,6 +257,52 @@ export interface Page {
      */
     image?: (number | null) | Media;
     description?: string | null;
+    /**
+     * Specify geographical targeting metadata.
+     */
+    location?: {
+      latitude?: string | null;
+      longitude?: string | null;
+      placeName?: string | null;
+    };
+    /**
+     * Manage indexing directives for search engine crawlers.
+     */
+    robots?: {
+      noIndex?: boolean | null;
+      noFollow?: boolean | null;
+      noArchive?: boolean | null;
+      noImageIndex?: boolean | null;
+      /**
+       * Provide an absolute URL if this page is a duplicate of another.
+       */
+      canonicalURL?: string | null;
+    };
+    /**
+     * Override general SEO metadata specifically for Facebook/OpenGraph and Twitter.
+     */
+    socialOverrides?: {
+      ogTitle?: string | null;
+      ogDescription?: string | null;
+      twitterCard?: ('summary' | 'summary_large_image' | 'app' | 'player') | null;
+      twitterTitle?: string | null;
+      twitterDescription?: string | null;
+    };
+    /**
+     * Define custom meta tags (e.g., custom og:title, theme-color, verify tokens, etc.)
+     */
+    customMetaTags?:
+      | {
+          type: 'name' | 'property' | 'http-equiv';
+          key: string;
+          content: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Provide valid JSON-LD structured data. Wrap the JSON object inside <script type="application/ld+json"> tag contents.
+     */
+    jsonLD?: string | null;
   };
   publishedAt?: string | null;
   /**
@@ -296,6 +346,52 @@ export interface Post {
      */
     image?: (number | null) | Media;
     description?: string | null;
+    /**
+     * Specify geographical targeting metadata.
+     */
+    location?: {
+      latitude?: string | null;
+      longitude?: string | null;
+      placeName?: string | null;
+    };
+    /**
+     * Manage indexing directives for search engine crawlers.
+     */
+    robots?: {
+      noIndex?: boolean | null;
+      noFollow?: boolean | null;
+      noArchive?: boolean | null;
+      noImageIndex?: boolean | null;
+      /**
+       * Provide an absolute URL if this page is a duplicate of another.
+       */
+      canonicalURL?: string | null;
+    };
+    /**
+     * Override general SEO metadata specifically for Facebook/OpenGraph and Twitter.
+     */
+    socialOverrides?: {
+      ogTitle?: string | null;
+      ogDescription?: string | null;
+      twitterCard?: ('summary' | 'summary_large_image' | 'app' | 'player') | null;
+      twitterTitle?: string | null;
+      twitterDescription?: string | null;
+    };
+    /**
+     * Define custom meta tags (e.g., custom og:title, theme-color, verify tokens, etc.)
+     */
+    customMetaTags?:
+      | {
+          type: 'name' | 'property' | 'http-equiv';
+          key: string;
+          content: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Provide valid JSON-LD structured data. Wrap the JSON object inside <script type="application/ld+json"> tag contents.
+     */
+    jsonLD?: string | null;
   };
   publishedAt?: string | null;
   authors?: (number | User)[] | null;
@@ -591,7 +687,17 @@ export interface ContentBlock {
  * via the `definition` "MediaBlock".
  */
 export interface MediaBlock {
-  media: number | Media;
+  type?: ('upload' | 'video') | null;
+  media?: (number | null) | Media;
+  videoUrl?: string | null;
+  /**
+   * Providing a title helps with accessibility and SEO.
+   */
+  videoTitle?: string | null;
+  /**
+   * Provide a short description for search engines.
+   */
+  videoDescription?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -1073,6 +1179,52 @@ export interface Service {
      */
     image?: (number | null) | Media;
     description?: string | null;
+    /**
+     * Specify geographical targeting metadata.
+     */
+    location?: {
+      latitude?: string | null;
+      longitude?: string | null;
+      placeName?: string | null;
+    };
+    /**
+     * Manage indexing directives for search engine crawlers.
+     */
+    robots?: {
+      noIndex?: boolean | null;
+      noFollow?: boolean | null;
+      noArchive?: boolean | null;
+      noImageIndex?: boolean | null;
+      /**
+       * Provide an absolute URL if this page is a duplicate of another.
+       */
+      canonicalURL?: string | null;
+    };
+    /**
+     * Override general SEO metadata specifically for Facebook/OpenGraph and Twitter.
+     */
+    socialOverrides?: {
+      ogTitle?: string | null;
+      ogDescription?: string | null;
+      twitterCard?: ('summary' | 'summary_large_image' | 'app' | 'player') | null;
+      twitterTitle?: string | null;
+      twitterDescription?: string | null;
+    };
+    /**
+     * Define custom meta tags (e.g., custom og:title, theme-color, verify tokens, etc.)
+     */
+    customMetaTags?:
+      | {
+          type: 'name' | 'property' | 'http-equiv';
+          key: string;
+          content: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Provide valid JSON-LD structured data. Wrap the JSON object inside <script type="application/ld+json"> tag contents.
+     */
+    jsonLD?: string | null;
   };
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -1103,12 +1255,39 @@ export interface Team {
   id: number;
   name: string;
   position: string;
+  Branch?: string | null;
   image: number | Media;
   facebook?: string | null;
   instagram?: string | null;
   linkedin?: string | null;
   email?: string | null;
   phone?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NaivashaTeamBlock".
+ */
+export interface NaivashaTeamBlock {
+  badge?: string | null;
+  title: string;
+  description: string;
+  members: (number | NaivashaTeam)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'naivashaTeamBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "naivasha-team".
+ */
+export interface NaivashaTeam {
+  id: number;
+  name: string;
+  position: string;
+  Branch?: string | null;
+  image: number | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -1254,6 +1433,16 @@ export interface MapBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'mapBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTABlock".
+ */
+export interface CTABlock {
+  heading?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ctaBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1495,6 +1684,10 @@ export interface PayloadLockedDocument {
         value: number | Service;
       } | null)
     | ({
+        relationTo: 'naivasha-team';
+        value: number | NaivashaTeam;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -1607,10 +1800,12 @@ export interface PagesSelect<T extends boolean = true> {
         galleryBlock?: T | GalleryBlockSelect<T>;
         serviceBlock?: T | ServiceBlockSelect<T>;
         teamBlock?: T | TeamBlockSelect<T>;
+        naivashaTeamBlock?: T | NaivashaTeamBlockSelect<T>;
         usefulLinksBlock?: T | UsefulLinksBlockSelect<T>;
         about?: T | AboutBlockSelect<T>;
         feature2?: T | Feature2BlockSelect<T>;
         mapBlock?: T | MapBlockSelect<T>;
+        ctaBlock?: T | CTABlockSelect<T>;
       };
   meta?:
     | T
@@ -1618,6 +1813,40 @@ export interface PagesSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
+        location?:
+          | T
+          | {
+              latitude?: T;
+              longitude?: T;
+              placeName?: T;
+            };
+        robots?:
+          | T
+          | {
+              noIndex?: T;
+              noFollow?: T;
+              noArchive?: T;
+              noImageIndex?: T;
+              canonicalURL?: T;
+            };
+        socialOverrides?:
+          | T
+          | {
+              ogTitle?: T;
+              ogDescription?: T;
+              twitterCard?: T;
+              twitterTitle?: T;
+              twitterDescription?: T;
+            };
+        customMetaTags?:
+          | T
+          | {
+              type?: T;
+              key?: T;
+              content?: T;
+              id?: T;
+            };
+        jsonLD?: T;
       };
   publishedAt?: T;
   generateSlug?: T;
@@ -1686,7 +1915,11 @@ export interface ContentBlockSelect<T extends boolean = true> {
  * via the `definition` "MediaBlock_select".
  */
 export interface MediaBlockSelect<T extends boolean = true> {
+  type?: T;
   media?: T;
+  videoUrl?: T;
+  videoTitle?: T;
+  videoDescription?: T;
   id?: T;
   blockName?: T;
 }
@@ -1879,6 +2112,18 @@ export interface TeamBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NaivashaTeamBlock_select".
+ */
+export interface NaivashaTeamBlockSelect<T extends boolean = true> {
+  badge?: T;
+  title?: T;
+  description?: T;
+  members?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "UsefulLinksBlock_select".
  */
 export interface UsefulLinksBlockSelect<T extends boolean = true> {
@@ -1979,6 +2224,15 @@ export interface MapBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTABlock_select".
+ */
+export interface CTABlockSelect<T extends boolean = true> {
+  heading?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1993,6 +2247,40 @@ export interface PostsSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
+        location?:
+          | T
+          | {
+              latitude?: T;
+              longitude?: T;
+              placeName?: T;
+            };
+        robots?:
+          | T
+          | {
+              noIndex?: T;
+              noFollow?: T;
+              noArchive?: T;
+              noImageIndex?: T;
+              canonicalURL?: T;
+            };
+        socialOverrides?:
+          | T
+          | {
+              ogTitle?: T;
+              ogDescription?: T;
+              twitterCard?: T;
+              twitterTitle?: T;
+              twitterDescription?: T;
+            };
+        customMetaTags?:
+          | T
+          | {
+              type?: T;
+              key?: T;
+              content?: T;
+              id?: T;
+            };
+        jsonLD?: T;
       };
   publishedAt?: T;
   authors?: T;
@@ -2163,6 +2451,7 @@ export interface PartnersSelect<T extends boolean = true> {
 export interface TeamSelect<T extends boolean = true> {
   name?: T;
   position?: T;
+  Branch?: T;
   image?: T;
   facebook?: T;
   instagram?: T;
@@ -2210,9 +2499,55 @@ export interface ServicesSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
+        location?:
+          | T
+          | {
+              latitude?: T;
+              longitude?: T;
+              placeName?: T;
+            };
+        robots?:
+          | T
+          | {
+              noIndex?: T;
+              noFollow?: T;
+              noArchive?: T;
+              noImageIndex?: T;
+              canonicalURL?: T;
+            };
+        socialOverrides?:
+          | T
+          | {
+              ogTitle?: T;
+              ogDescription?: T;
+              twitterCard?: T;
+              twitterTitle?: T;
+              twitterDescription?: T;
+            };
+        customMetaTags?:
+          | T
+          | {
+              type?: T;
+              key?: T;
+              content?: T;
+              id?: T;
+            };
+        jsonLD?: T;
       };
   generateSlug?: T;
   slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "naivasha-team_select".
+ */
+export interface NaivashaTeamSelect<T extends boolean = true> {
+  name?: T;
+  position?: T;
+  Branch?: T;
+  image?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -54,7 +54,7 @@ const CountUp: React.FC<{ value?: number | null; suffix?: string | null }> = ({
 // ---------- main block ----------
 const StatsBlock: React.FC<Props> = ({ className, heading, stats }) => {
   return (
-    <section className={cn('bg-primary text-background py-12 px-4', className)}>
+    <section className={cn('bg-primary text-background py-12 container', className)}>
       {heading && <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">{heading}</h2>}
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
         {stats?.map((stat, index) => (
@@ -62,10 +62,10 @@ const StatsBlock: React.FC<Props> = ({ className, heading, stats }) => {
             key={index}
             className="flex flex-col items-center text-center p-6 bg-background/15 rounded-xl"
           >
-            <p className="text-3xl lg:text-4xl font-bold mb-2 tabular-nums">
+            <p className="text-4xl lg:text-5xl font-bold mb-2 tabular-nums text-white">
               <CountUp value={stat?.number} suffix={stat?.suffix} />
             </p>
-            <span className="text-sm font-medium text-background/80 uppercase tracking-wide">
+            <span className="text-sm font-medium uppercase tracking-wide text-white">
               {stat?.label}
             </span>
           </div>

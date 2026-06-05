@@ -15,6 +15,7 @@ import { CardBlock } from '@/blocks/CardsBlock/Component'
 import { GalleryBlock } from '@/blocks/galleryBlock/Component'
 import { ServiceBlock } from '@/blocks/ServiceBlock/Component'
 import { TeamBlockComponent } from '@/blocks/TeamBlock/Component'
+import { NaivashaTeamBlockComponent } from '@/blocks/NaivashaTeamBlock/Component'
 import { UsefulLinksBlockComponent } from './UsefulLinksBlock/Component'
 import { AboutBlockComponent } from './AboutBlock/Component'
 import { Feature2BlockComponent } from './Feature2Block/Component'
@@ -34,6 +35,7 @@ const blockComponents = {
   galleryBlock: GalleryBlock,
   serviceBlock: ServiceBlock,
   teamBlock: TeamBlockComponent,
+  naivashaTeamBlock: NaivashaTeamBlockComponent,
   usefulLinksBlock: UsefulLinksBlockComponent,
   about: AboutBlockComponent,
   feature2: Feature2BlockComponent,

@@ -10,7 +10,9 @@ import RichText from '@/components/RichText'
 import { ServiceHero } from '@/heros/ServicesHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
+import { JsonLd } from '@/components/JsonLd'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { ServicesCollectionArchive } from '@/components/ServicesCollectionArchive'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -51,6 +53,7 @@ export default async function ServicePage({ params: paramsPromise }: Args) {
   return (
     <article>
       <PageClient />
+      <JsonLd code={service?.meta?.jsonLD} />
 
       <PayloadRedirects disableNotFound url={url} />
 

@@ -10,6 +10,7 @@ import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
+import { JsonLd } from '@/components/JsonLd'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import ReviewsWidget from '@/components/ReviewsWrapper'
 import { GoogleMap } from '@/components/GoogleMap'
@@ -64,6 +65,7 @@ export default async function Page({ params: paramsPromise }: PageProps) {
   return (
     <article className="pt-32">
       <PageClient />
+      <JsonLd code={page?.meta?.jsonLD} />
 
       {/* allow redirects even for valid pages */}
       <PayloadRedirects disableNotFound url={url} />
